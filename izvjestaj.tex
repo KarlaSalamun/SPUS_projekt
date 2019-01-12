@@ -62,21 +62,68 @@ or Math in Paper Title or Abstract.
 component, formatting, style, styling, insert
 \end{IEEEkeywords}
 
-\section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. 
+\section{Uvod}
+Zvuk je mehanički val koji se prenosi određenim medijem. Ljudsko uho je osjetljivo na
+frekvencije između otprilike 20 Hz i 20 000 Hz. Jedan je od mnogih oblika kontinuiranih;
+analognih signala naše okoline. Ljudski interes za fenomen zvuka traje od najranije povijesti. Do
+današnjice je razvijena čitava kultura i tehnologija koja omogućuje stvaranje, snimanje, obradbu
+i prijenos zvuka. Pojam povezan sa zvukom koji obuhvaca i ispreplice znanost i umjetnost je glazba.
+S ciljem što boljeg doživljaja glazbe, audio signali se obrađuju u kontinuiranoj i
+diskretnoj domeni. Mikrofon pretvara zvučne valove u analogni električni sinusni signal. Taj je
+signal određen jedinstvenom frekvencijom, brzinom, odstupanjima, itd. Obradba analognim
+sklopovima podložna je pogreškama uzrokovanih šumom, preslušavanjem vodova,
+temperaturnom ovisnošću, netočnostima nominalnih iznosa elemenata, itd. Da bi se kvalitetno
+obradio, kontinuirani signal je potrebno digitalizirati. Digitalna obrada signala se provodi u
+računalima. Ima brojne prednosti, poput neosjetljivosti na šum i starenje, laku prilagodbu na
+nove zadatke, programabilnost.
 
-\section{Ease of Use}
+Tema projekta je konstruiranje filtara za dodavanje efekata, digitalna obradba snimljenog zvuka
+gitare primjenom istih te ispitivanje njihovog utjecaja na signal u vremenskoj i frekvencijskoj
+domeni. Razvoj instrumenata i postupaka digitalne obradbe omogućio je eksperimentiranje
+zvukom. Glazba se često razvijala upravo iz razloga što su pojedine slučajne greške u sviranju
+instrumenata i obradbi snimaka zvuka postale utjecajni zvučni efekti. Zvučni efekti su pojam koji
+obuhvaća hardver i softver odgovoran za manipulaciju zvukom. Moguće ih je dodati zvuku u
+procesu nastajanja s ciljem da kasnije budu filtrirani ili preoblikovani [1], ili
+na kraju obrade, u produkcijskoj fazi. Ne postoji jedinstveno pravilo koje je potrebno slijediti pri
+odabiru redoslijeda primjene efekata. No, promijenjeni redoslijed uzrokuje promjenu zvuka.
+Potrebno je voditi računa o spomenutom obzirom na zvuk koji je poželjno stvoriti. Iako postoje
+mnoge vrste i podjele, kao temeljna podjela digitalnih zvučnih efekata
+može se navesti sljedeća:
+\begin{itemize}
+	\item{modulacijski efekti – \textit{Chorus}, \textit{Tremolo}, \textit{Flanger}, \textit{Phaser},}
+	\item{vremenski efekti – \textit{Reverb}, kašnjenje, odjek,}
+	\item{spektralni efekti – ekvilizacija, \textit{Panning},}
+	\item{dinamički efekti – kompresija i distorzija.}
+\end{itemize}
 
-\subsection{Maintaining the Integrity of the Specifications}
+Tipični redoslijed efekata za gitaru ([1]) jest kompresija – distorzija – ekvilizacija – smanjenje šuma 
+– modulacija – kašnjenje – odjek.
 
-The IEEEtran class file is used to format your paper and style the text. All margins, 
-column widths, line spaces, and text fonts are prescribed; please do not 
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement 
-and others are deliberate, using specifications that anticipate your paper 
-as one part of the entire proceedings, and not as an independent document. 
-Please do not revise any of the current designations.
+Filtri po definiciji uklanjaju ili atenuiraju određene frekvencije iz spektra signala iznad 
+ili ispod neke granične frekvencije. Izjednačivači, pak, pojačavaju ili smanjuju određene frekvencijske
+pojaseve, dok druge ne mijenjaju.
+
+
+\section{Kompresija}
+
+Kompresor djeluje na zvučni signal u cijelosti s ciljem kontrole zvuka i stvaranja \textit{sustain} 
+efekta. Kompresija je, zapravo, automatska kontrola glasnoće. Zadaća kompresora je smanjenje 
+dinamičkog raspona signala, tj. varijacije između najglasnijih i najtiših dijelova signala. 
+Dijelovi signala s velikim amplitudama, odnosno oni glasniji od nekog praga su atenuirani. Oni s 
+najmanjim amplitudama, tj. tiši od nekog praga su pojačani s namjerom postizanja uravnoteženijeg zvuka 
+bez distorzije. Kompresijom je omogućeno pojačanje signala bez potrebe za rezanjem (\textit{clippingom}). 
+Rezultat je dotjeraniji zvuk. Ipak, javlja se potreba za oprezom jer prekomjerna kompresija stvara 
+zašumljen i bezizražajan zvuk. Gubitak dijela dinamike postaje zamjetan pri slušanju. 
+
+Našim projektom napravljen je kod za usporedbu originalnog i komprimiranog signala u vremenskoj i 
+frekvencijskoj domeni što je vidljivo na slici \ref{kompresija_vrijeme}.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.45]{slike/kompresija_vrijeme.png}
+    \centering
+    \caption{Originalni i komprimirani signal u vremenskoj domeni}							%dodati legend u matlabu
+    \label{kompresija_vrijeme}	
+\end{figure}
 
 \section{Prepare Your Paper Before Styling}
 Before you begin to format your paper, first write and save the content as a 
