@@ -131,9 +131,42 @@ vremenskoj domeni, to je u frekvencijskoj domeni vidljivo kao novonastala istosm
     \label{komp_spektar}
 \end{figure}
 
-\section{Efekti temeljeni na kašnjenju}
+\section{Odjek}
 
-\subsection{Jeka}
+Efekt odjeka temelji se na efektu kašnjenja. Efekt kašnjenja može se opisati kao snimanje ulaznog signala
+koji se zatim reproducira nakon određenog vremena. Signal kojemu je dodan efekt kašnjenja, može se
+reproducirati više puta ili se ponovno snimiti što stvara ponavljajući zvuk. Osnovna struktura kašnjenja može
+se ostvariti pomoću FIR ili IIR filtra ili kombinacijom dvaju filtara. Efekt odjeka može se realizirati pomoću
+jednostavnog FIR filtra. Jednadžba FIR filtra kojim se realizira odjek dana je u nastavku.\\
+\[y(n) = x(n) + g*x(n-M), M = \tau/f_{s}\]
+Gdje:
+ \begin{itemize}
+   \item{$g$ - predstavlja pojačanje obrađenog signala,}
+   \item{$\tau$ - predstavlja iznos kašnjenja signala,}
+   \item{$f_{s}$ - predstavlja frekvenciju otipkavanja.}
+ \end{itemize}
+Dodavanjem efekta odjeka na osnovni signal zvuk poprima dojam odbijanja zvuka od zida, dok se zapravo čuje
+ponavljanje osnovnog signala.
+
+Na slici \ref{echo_ulaz} prikazan je spektar ulaznog signala, dok je na slici \ref{echo} prikazan spektar
+signala s dodanom jekom. Na spektru obrađenog
+signala vide se određene frekvencijske komponente koje se ne mogu vidjeti na spektru ulaznog signala.
+Dodatne frekvencijske komponente pojavljuju se upravo zbog ponavljanja signala kroz vrijeme.
+
+\begin{figure}[h]
+  \includegraphics[scale=0.3]{slike/echo_ulaz.jpeg}
+  \centering
+  \caption{Spektar ualznog signala}
+  \label{echo_ulaz}
+\end{figure}
+
+\begin{figure}[h]
+  \includegraphics[scale=0.3]{slike/echo.png}
+  \centering
+  \caption{Spektar obrađenog signala}
+  \label{echo}
+\end{figure}
+
 
 \section{Zaključak}
 Digitalna obradba signala sastavni je dio glazbene produkcije. Zvučni efekti, često nastali kao
