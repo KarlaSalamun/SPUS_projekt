@@ -99,35 +99,7 @@ Filtri po definiciji uklanjaju ili atenuiraju određene frekvencije iz spektra s
 ili ispod neke granične frekvencije. Izjednačivači, pak, pojačavaju ili smanjuju određene frekvencijske
 pojaseve, dok druge ne mijenjaju.
 
-\section{Efekti temeljeni na kašnjenju}
 
-\subsection{Jeka}
-
-\section{Efekti temeljeni na modulaciji}
-
-\subsection{\textit{Flanger}}
-
-\textit{Flanger} je zvučni efekt koji na ulazni signal unosi kašnjenje promijenjivog iznosa (najčešće manje
-od 15 ms), te zakašnjeli signal dodaje na ulazni. Pritom se iznos kašnjenja mijenja kao sinusni signal 
-niske frekvencije (tipično 0.1 - 5 Hz) \citep{b1}. Primjena \textit{flanger} efekta svodi se, dakle, na 
-dodavanje fazno moduliranog ulaznog signala na izvorni signal. FIR filtar koji se temelji na kašnjenju može
-se prikazati jednadžbom diferencija:
-\begin{equation}
-	y[n]=x[n]+g\*x[n-M]
-	\label{flanger}
-\end{equation}
-gdje je $M$ promijenjivi iznos kašnjenja, a $g$ faktor kojim se pojačava ili atenuira zakašnjeli signal.  
-
-Na slici \ref{flang_spektar} uspoređeni su spektrogrami originalnog signala i signala na koji je 
-primijenjen \textit{flanger}. U spektrogramu su vidljive nove komponente koje su nastale uslijed modulacije
-zakašnjelog ulaznog signala frekvencijom 1 Hz. 
-
-\begin{figure}[h]
-    \includegraphics[width=200]{slike/flanger_spektar.png}
-    \centering
-    \caption{Spektrogram signala s \textit{flanger} efektom}							%dodati legend u matlabu
-    \label{flang_spektar}
-\end{figure}
 
 \section{Kompresija}
 
@@ -158,6 +130,30 @@ vremenskoj domeni, to je u frekvencijskoj domeni vidljivo kao novonastala istosm
     \centering
     \caption{Spektrogram komprimiranog signala}							%zasto DC komponenta??
     \label{komp_spektar}
+\end{figure}
+
+\section{\textit{Flanger}}
+
+\textit{Flanger} je zvučni efekt koji na ulazni signal unosi kašnjenje promijenjivog iznosa (najčešće manje
+od 15 ms), te zakašnjeli signal dodaje na ulazni. Pritom se iznos kašnjenja mijenja kao sinusni signal 
+niske frekvencije (tipično 0.1 - 5 Hz) \citep{b1}. Primjena \textit{flanger} efekta svodi se, dakle, na 
+dodavanje fazno moduliranog ulaznog signala na izvorni signal. FIR filtar koji se temelji na kašnjenju može
+se prikazati jednadžbom diferencija:
+\begin{equation}
+  y[n]=x[n]+g\*x[n-M]
+  \label{flanger}
+\end{equation}
+gdje je $M$ promijenjivi iznos kašnjenja, a $g$ faktor kojim se pojačava ili atenuira zakašnjeli signal.  
+
+Na slici \ref{flang_spektar} uspoređeni su spektrogrami originalnog signala i signala na koji je 
+primijenjen \textit{flanger}. U spektrogramu su vidljive nove komponente koje su nastale uslijed modulacije
+zakašnjelog ulaznog signala frekvencijom 1 Hz. 
+
+\begin{figure}[h]
+    \includegraphics[width=200]{slike/flanger_spektar.png}
+    \centering
+    \caption{Spektrogram signala s \textit{flanger} efektom}              
+    \label{flang_spektar}
 \end{figure}
 
 \section{Odjek}
