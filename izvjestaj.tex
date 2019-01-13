@@ -63,8 +63,8 @@ Zvuk je mehanički val koji se prenosi određenim medijem. Ljudsko uho je osjetl
 frekvencije između otprilike 20 Hz i 20 000 Hz. Jedan je od mnogih oblika kontinuiranih;
 analognih signala naše okoline. Ljudski interes za fenomen zvuka traje od najranije povijesti. Do
 današnjice je razvijena čitava kultura i tehnologija koja omogućuje stvaranje, snimanje, obradbu
-i prijenos zvuka. Pojam povezan sa zvukom koji obuhvaca i ispreplice znanost i umjetnost je glazba.
-S ciljem što boljeg doživljaja glazbe, audio signali se obrađuju u kontinuiranoj i
+i prijenos zvuka. Pojam koji obuhvaća i isprepliće znanost i umjetnost, a koji je povezan sa zvukom 
+je glazba. S ciljem što boljeg doživljaja glazbe, audio signali se obrađuju u kontinuiranoj i
 diskretnoj domeni. Mikrofon pretvara zvučne valove u analogni električni sinusni signal. Taj je
 signal određen jedinstvenom frekvencijom, brzinom, odstupanjima, itd. Obradba analognim
 sklopovima podložna je pogreškama uzrokovanih šumom, preslušavanjem vodova,
@@ -196,18 +196,35 @@ U spektru je šum vidljiv kao nove spektralne komponente.
 
 \textit{Flanger} je zvučni efekt koji na ulazni signal unosi kašnjenje promijenjivog iznosa (najčešće manje
 od 15 ms), te zakašnjeli signal dodaje na ulazni. Pritom se iznos kašnjenja mijenja kao sinusni signal
-niske frekvencije (tipično 0.1 - 5 Hz)~\cite{b1}. Primjena \textit{flanger} efekta svodi se, dakle, na
-dodavanje fazno moduliranog ulaznog signala na izvorni signal. FIR filtar koji se temelji na kašnjenju može
-se prikazati jednadžbom diferencija:
+niske frekvencije - LFO (engl. \textit{Low Frequency Oscillator}, tipično 0.1 - 5 Hz)~\cite{b1}. 
+Primjena \textit{flanger} efekta svodi se, dakle, na dodavanje fazno moduliranog ulaznog signala na izvorni 
+signal. Na slici \ref{flang_simulink} prikazan je blok-dijagram FIR filtra kojim se realizira \textit{flanger} 
+efekt. 
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/flanger_simulink.png}
+    \centering
+    \caption{Blok-dijagram filtra za realizaciju \textit{flanger} efekta~\cite{b4}}
+    \label{flang_simulink}
+\end{figure}
+
+FIR filtar koji se temelji na kašnjenju može se prikazati jednadžbom diferencija:
 \begin{equation}
   y[n]=x[n]+g\*x[n-M]
   \label{flanger}
 \end{equation}
 gdje je $M$ promijenjivi iznos kašnjenja, a $g$ faktor kojim se pojačava ili atenuira zakašnjeli signal.
+Budući da je iznos kašnjenja na izlazu iz LFO realan broj, prije modulacije potrebno je provesti zaokruživanje
+na cijeli broj ili interpolaciju kojom se usrednjava vrijednost dvaju susjednih uzoraka.   
 
-Na slici \ref{flang_spektar} uspoređeni su spektrogrami originalnog signala i signala na koji je
-primijenjen \textit{flanger}. U spektrogramu su vidljive nove komponente koje su nastale uslijed modulacije
-zakašnjelog ulaznog signala frekvencijom 1 Hz.
+Zvuk na koji je primijenjen \textit{flanger} prepoznatljiv je po efektu koji se popularno naziva 
+\textit{whooshing}. Taj se efekt javlja zbog konstruktivne i destruktivne interferencije između kombiniranih 
+zvučnih valova.
+
+Slika \ref{flang_spektar} prikazuje spektrogram signala na koji je pimijenjen \textit{flanger} uz LFO 
+frekvenciju 1 Hz, maksimalni iznos kašnjenja 5 ms te faktor pojačanja $g=0.7$. U odnosu na spektrogram originalnog
+signala koji je prikazan slikom \ref{komp_ulaz_spektar}, vidljive su nove komponente koje su nastale uslijed 
+modulacije zakašnjelog ulaznog signala.
 
 \begin{figure}[H]
     \includegraphics[width=200pt]{slike/flanger_spektar.png}
@@ -239,7 +256,7 @@ Dodatne frekvencijske komponente pojavljuju se upravo zbog ponavljanja signala k
 
 \begin{figure}[H]
   \centerline{\includegraphics[height=200pt]{slike/echo_ulaz.jpeg}}
-  \caption{Spektar ualznog signala}
+  \caption{Spektar ulaznog signala}
   \label{echo_ulaz}
 \end{figure}
 
