@@ -218,11 +218,11 @@ zakašnjelog ulaznog signala frekvencijom 1 Hz.
 
 \section{Odjek}
 
-Efekt odjeka temelji se na efektu kašnjenja. Efekt kašnjenja može se opisati kao snimanje ulaznog signala
+Efekt odjeka temelji se na efektu kašnjenja, koji se može opisati kao snimanje, odnosno otipkavanje, ulaznog signala
 koji se zatim reproducira nakon određenog vremena. Signal kojemu je dodan efekt kašnjenja, može se
 reproducirati više puta ili se ponovno snimiti što stvara ponavljajući zvuk. Osnovna struktura kašnjenja može
-se ostvariti pomoću FIR ili IIR filtra ili kombinacijom dvaju filtara. Efekt odjeka može se realizirati pomoću
-jednostavnog FIR filtra. Jednadžba FIR filtra kojim se realizira odjek dana je jednažbom (\ref{flanger}).
+se ostvariti pomoću FIR ili IIR filtra ili kombinacijom dvaju filtara, gdje se efekt odjeka realizira pomoću
+jednostavnog FIR filtra danog jednažbom (\ref{flanger}).
 Gdje je: \[M = \tau/f_{s}\]
 a $\tau$ i $f_{s}$:
  \begin{itemize}
@@ -230,18 +230,46 @@ a $\tau$ i $f_{s}$:
    \item{$f_{s}$ - frekvenciju otipkavanja.}
  \end{itemize}
 Dodavanjem efekta odjeka na osnovni signal zvuk poprima dojam odbijanja zvuka od zida, dok se zapravo čuje
-ponavljanje osnovnog signala.
-
-Na slici \ref{echo_ulaz} prikazan je spektar ulaznog signala, dok je na slici \ref{echo} prikazan spektar
-signala s dodanom jekom. Na spektru obrađenog
-signala vide se određene frekvencijske komponente koje se ne mogu vidjeti na spektru ulaznog signala.
-Dodatne frekvencijske komponente pojavljuju se upravo zbog ponavljanja signala kroz vrijeme.
+ponavljanje osnovnog signala. MATLAB model opisanog efekta dan je slikom \ref{echo_model}. Dodatni efekt povezan
+s odjekom je efekt koji nastaje zbog povratne veze, a čuje se kao zvuk koji postepeno nestaje~\cite{b4}. Drugim riječima
+vrijednost povratne veze određuje broj odjeka na način da neki postotak izlaza prosljeđuje na ulaz.
+Model opisuje već danu jednadžbu FIR filtra uz dodatak povratne veze. Vrijednost $d$ u modelu odgovara vrijednosti
+$M$ u jednadžbi filtra, a $f$ (\textit{FeedbackLevel}) pojačanje linije s dodanim efektom odjeka.
 
 \begin{figure}[H]
-  \centerline{\includegraphics[height=200pt]{slike/echo_ulaz.jpeg}}
-  \caption{Spektar ualznog signala}
-  \label{echo_ulaz}
+    \includegraphics[width=200pt]{slike/echo_matlab.png}
+    \centering
+    \caption{MATLAB model odjeka}
+    \label{echo_model}
 \end{figure}
+
+Na slici \ref{ulaz_vrijeme} prikazan je ulazni signal u vremenu, a na slici \ref{echo_vrijeme} prikazan je signal
+u vremenu na koji je dodan efekt odjeka. Ako se uspoređuju ulazni i obrađeni signal može se primjetiti
+kako obrađeni signal izgleda "punije", odnosno vidi se kako je na ulazni signal superponiran dodatni signal.
+Takvo ponašanje kod odjeka je očekivano zato što se obrađeni signal zbraja s ulaznim signalom. Na slici z dodanim
+efektom odjeka može se vidjeti i da se jedno kratko vrijeme u početku ulazni i obrađeni signal podudaraju. Takav rezultat
+je također očekivan jer efekt odjeka djeluje upravo tako da se ulaznom signalu superponira obrađeni signal nakon određenog
+vremena kašnjenja.
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/echo_vrijeme.png}
+    \centering
+    \caption{Signal s dodanim odjekom u vremenu}
+    \label{echo_vrijeme}
+\end{figure}
+
+Na slici \ref{komp_ulaz_spektar} prikazan je spektrogram ulaznog signala, dok je na slici \ref{echo} prikazan spektrogram
+signala s dodanim odjekom. Kad se uspoređuju spektrogrami ulaznog i obrađenog signala može se zaključiti da nema
+značajnih promjena u spektrogramima, što je očekivano jer dodavanjem odjeka se ne dodaju nove frekvencijske komponente.
+Drugim riječima, ako je ulaznom signalu nadodan signal koji odgovara ulaznom, ali tek nakon određenog vremena u spektru
+se ne očekuju nove frekvencijske komponente.
+
+
+% \begin{figure}[H]
+%   \centerline{\includegraphics[height=200pt]{slike/echo_ulaz.jpeg}}
+%   \caption{Spektar ualznog signala}
+%   \label{echo_ulaz}
+% \end{figure}
 
 \begin{figure}[H]
   \centerline{\includegraphics[height=200pt]{slike/echo.png}}
@@ -266,6 +294,8 @@ Kompresija smanjuje dinamički raspon signala bez distorzije, bez potrebe za rez
   \url{https://www.fer.unizg.hr/_download/repository/EAT13_Dinamicka_obrada_audio_signala_2017-18.pdf}
   \bibitem{b4} Delay-Based Effects - MATLAB,
   \url{https://www.mathworks.com/help/audio/examples/delay-based-audio-effects.html}
+  \bibitem{b5} Effects Explained: Echo, Delay, and Reverb
+  \url{http://www.gibson.com/News-Lifestyle/Features/en-us/effects-explained-echo-delay.aspx}
 \end{thebibliography}
 
 \end{document}
