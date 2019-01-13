@@ -111,27 +111,86 @@ Dijelovi signala s velikim amplitudama, odnosno oni glasniji od nekog praga su a
 najmanjim amplitudama, tj. tiši od nekog praga su pojačani s namjerom postizanja uravnoteženijeg zvuka
 bez distorzije. Kompresijom je omogućeno pojačanje signala bez potrebe za rezanjem (\textit{clippingom}).
 Rezultat je dotjeraniji zvuk. Ipak, javlja se potreba za oprezom jer prekomjerna kompresija stvara
-zašumljen i bezizražajan zvuk. Gubitak dijela dinamike postaje zamjetan pri slušanju.
-
-Ovim projektom napravljen je kod za usporedbu originalnog i komprimiranog signala u vremenskoj i
-frekvencijskoj domeni što je vidljivo na slici \ref{komp_vrijeme}.
+zašumljen i bezizražajan zvuk. Gubitak dijela dinamike postaje zamjetan pri slušanju.\\
+Našim projektom napravljen je kod za usporedbu originalnog i komprimiranog signala u vremenskoj i
+frekvencijskoj domeni. Blok dijagram kompresora prikazan je slikom \ref{kompresija}.
 
 \begin{figure}[H]
-    \includegraphics[width=200pt]{slike/kompresija_vrijeme.png}
+    \includegraphics[width=200pt]{slike/kompresija.png}
     \centering
-    \caption{Originalni i komprimirani signal u vremenskoj domeni}							%dodati legend u matlabu
+    \caption{Blok dijagram kompresora}
+    \label{kompresija}
+\end{figure}
+
+Diskretizirani ulazni signal se pretvara u decibele radi intuitivnijih prikaza %(izbaciti ovo i početi od parametara?)
+ operacija, a nakon kompresije se vraća u linearnu domenu. Glavni parametri kompresije su ~\cite{b3}:
+ \begin{itemize}
+   \item{prag (\textit{Treshold}) – razina ulaznog signala koja određuje početak kompresije,}
+   \item{omjer kompresije (\textit{Ratio}) – omjer promjene signala na ulazu i izlazu,}
+   \item{pojačanje (\textit{Make-up gain}) – pojačanje ukupne razine signala,}
+   \item{vrijeme reakcije (\textit{Attack time}) – vrijeme koje je potrebno da kompresor počne djelovati na
+   amplitudu signala prema definiranom omjeru kompresije nakon što signal prijeđe prag,}
+   \item{vrijeme otpuštanja (\textit{Release time}) – vrijeme koje je potrebno da kompresor prestane djelovati na
+   amplitudu signala i vrati se omjer kompresije 1:1 nakon što signal ponovno prijeđe prag,}
+   \item{koljeno (\textit{Knee}) – prijelazno područje u izlaznoj karakteristici kompresora, %izlaznoj=prijenosnoj?
+   mjesto dodira signala i linije praga.}
+ \end{itemize}
+
+ Manipulacija spomenutih parametara rezultira različitim oblicima zvuka. Promjena koljena određuje koliko će
+ „glatko“ kompresor rezati signal. Promjena vremena reakcije i otpuštanja također djeluje na uglađenost zvuka.
+ Što su parametri manji, to će kompresoru trebati manje vremena za početak djelovanja na amplitudu pa će signal
+ zvučati dotjeranije. Najveće promjene zvuka događaju se mijenjanjem praga jer on određuje koliko će posla imati
+ kompresor i koliko će „zamaskirati“ originalni signal. Za optimalne parametre prema ~\cite{b2}, dobije se vidljiva
+ razlika u vremenskoj domeni, što je prikazano na slikama \ref{ulaz_vrijeme} i \ref{komp_vrijeme}.
+ Primjećujemo smanjenu razliku između dijelova signala s najvišim i najnižim amplitudama.
+
+% Ovim projektom napravljen je kod za usporedbu originalnog i komprimiranog signala u vremenskoj i
+% frekvencijskoj domeni što je vidljivo na slici \ref{komp_vrijeme}.
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/def_orig.bmp}
+    \centering
+    \caption{Originalni signal u vremenskoj domeni}							%dodati legend u matlabu
+    \label{ulaz_vrijeme}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/def_kompr.bmp}
+    \centering
+    \caption{Komprimirani signal u vremenskoj domeni}							%dodati legend u matlabu
     \label{komp_vrijeme}
 \end{figure}
 
-Na slici \ref{komp_spektar} vidljiva je razlika u spektru. Budući da se događaju promjene u amplitudi u
-vremenskoj domeni, to je u frekvencijskoj domeni vidljivo kao novonastala istosmjerna komponenta.
+% Na slici \ref{komp_spektar} vidljiva je razlika u spektru. Budući da se događaju promjene u amplitudi u
+% vremenskoj domeni, to je u frekvencijskoj domeni vidljivo kao novonastala istosmjerna komponenta.
+Na idućim slikama vidljiva je razlika u spektru. Budući da se događaju promjene u amplitudi u vremenskoj domeni,
+to je u frekvencijskoj domeni vidljivo kao novonastala istosmjerna komponenta.
 
 \begin{figure}[H]
-    \includegraphics[width=200pt]{slike/kompresija_spektar.png}
+    \includegraphics[width=200pt]{slike/originalni_spektrogram.bmp}
+    \centering
+    \caption{Spektrogram originalnog signala}
+    \label{komp_ulaz_spektar}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/spektrogram_nakon_kompresije.bmp}
     \centering
     \caption{Spektrogram komprimiranog signala}							%zasto DC komponenta??
     \label{komp_spektar}
 \end{figure}
+
+Kao što je već spomenuto, prekomjerna kompresija može utjecati na stvaranje zašumljenog, bezizražajnog
+zvuka kao što je prikazano na slici \ref{komp_sum}. U ovom slučaju problem je prenizak prag.
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/prenizak_prag.bmp}
+    \centering
+    \caption{Spektrogram komprimiranog signala}
+    \label{komp_sum}
+\end{figure}
+
+U spektru je šum vidljiv kao nove spektralne komponente.
 
 \section{\textit{Flanger}}
 
@@ -201,6 +260,12 @@ Kompresija smanjuje dinamički raspon signala bez distorzije, bez potrebe za rez
 \begin{thebibliography}{00}
 \bibitem{b1} Cardiff University, ``Digital Audio Effects'',
 	\url{www.cs.cf.ac.uk/Dave/CM0268/PDF/10_CM0268_Audio_FX.pdf}
+  \bibitem{b2} Compressor - MATLAB,
+  \url{https://www.mathworks.com/help/audio/ref/compressor.html}
+  \bibitem{b3} ``Dinamička obrada audiosignala'',
+  \url{https://www.fer.unizg.hr/_download/repository/EAT13_Dinamicka_obrada_audio_signala_2017-18.pdf}
+  \bibitem{b4} Delay-Based Effects - MATLAB,
+  \url{https://www.mathworks.com/help/audio/examples/delay-based-audio-effects.html}
 \end{thebibliography}
 
 \end{document}
