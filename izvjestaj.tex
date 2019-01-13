@@ -8,6 +8,7 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{url}
+\usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -80,7 +81,7 @@ instrumenata i obradbi snimaka zvuka postale utjecajni zvučni efekti. Zvučni e
 obuhvaća hardver i softver odgovoran za manipulaciju zvukom. Moguće ih je dodati zvuku u
 procesu nastajanja s ciljem da kasnije budu filtrirani ili preoblikovani, ili
 na kraju obrade, u produkcijskoj fazi. Ne postoji jedinstveno pravilo koje je potrebno slijediti pri
-odabiru redoslijeda primjene efekata \citep{b1}. No, promijenjeni redoslijed uzrokuje promjenu zvuka.
+odabiru redoslijeda primjene efekata~\cite{b1}. No, promijenjeni redoslijed uzrokuje promjenu zvuka.
 Potrebno je voditi računa o spomenutom obzirom na zvuk koji je poželjno stvoriti. Iako postoje
 mnoge vrste i podjele, kao temeljna podjela digitalnih zvučnih efekata
 može se navesti sljedeća:
@@ -92,7 +93,7 @@ može se navesti sljedeća:
 	\item{dinamički efekti – kompresija i distorzija.}
 \end{itemize}
 
-Tipični redoslijed efekata za gitaru \cite{b1} jest kompresija – distorzija – ekvilizacija – smanjenje šuma
+Tipični redoslijed efekata za gitaru~\cite{b1} jest kompresija – distorzija – ekvilizacija – smanjenje šuma
 – modulacija – kašnjenje – odjek.
 
 Filtri po definiciji uklanjaju ili atenuiraju određene frekvencije iz spektra signala iznad
@@ -115,8 +116,8 @@ zašumljen i bezizražajan zvuk. Gubitak dijela dinamike postaje zamjetan pri sl
 Ovim projektom napravljen je kod za usporedbu originalnog i komprimiranog signala u vremenskoj i
 frekvencijskoj domeni što je vidljivo na slici \ref{komp_vrijeme}.
 
-\begin{figure}[h]
-    \includegraphics[width=200]{slike/kompresija_vrijeme.png}
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/kompresija_vrijeme.png}
     \centering
     \caption{Originalni i komprimirani signal u vremenskoj domeni}							%dodati legend u matlabu
     \label{komp_vrijeme}
@@ -125,8 +126,8 @@ frekvencijskoj domeni što je vidljivo na slici \ref{komp_vrijeme}.
 Na slici \ref{komp_spektar} vidljiva je razlika u spektru. Budući da se događaju promjene u amplitudi u
 vremenskoj domeni, to je u frekvencijskoj domeni vidljivo kao novonastala istosmjerna komponenta.
 
-\begin{figure}[h]
-    \includegraphics[width=200]{slike/kompresija_spektar.png}
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/kompresija_spektar.png}
     \centering
     \caption{Spektrogram komprimiranog signala}							%zasto DC komponenta??
     \label{komp_spektar}
@@ -135,24 +136,24 @@ vremenskoj domeni, to je u frekvencijskoj domeni vidljivo kao novonastala istosm
 \section{\textit{Flanger}}
 
 \textit{Flanger} je zvučni efekt koji na ulazni signal unosi kašnjenje promijenjivog iznosa (najčešće manje
-od 15 ms), te zakašnjeli signal dodaje na ulazni. Pritom se iznos kašnjenja mijenja kao sinusni signal 
-niske frekvencije (tipično 0.1 - 5 Hz) \citep{b1}. Primjena \textit{flanger} efekta svodi se, dakle, na 
+od 15 ms), te zakašnjeli signal dodaje na ulazni. Pritom se iznos kašnjenja mijenja kao sinusni signal
+niske frekvencije (tipično 0.1 - 5 Hz)~\cite{b1}. Primjena \textit{flanger} efekta svodi se, dakle, na
 dodavanje fazno moduliranog ulaznog signala na izvorni signal. FIR filtar koji se temelji na kašnjenju može
 se prikazati jednadžbom diferencija:
 \begin{equation}
   y[n]=x[n]+g\*x[n-M]
   \label{flanger}
 \end{equation}
-gdje je $M$ promijenjivi iznos kašnjenja, a $g$ faktor kojim se pojačava ili atenuira zakašnjeli signal.  
+gdje je $M$ promijenjivi iznos kašnjenja, a $g$ faktor kojim se pojačava ili atenuira zakašnjeli signal.
 
-Na slici \ref{flang_spektar} uspoređeni su spektrogrami originalnog signala i signala na koji je 
+Na slici \ref{flang_spektar} uspoređeni su spektrogrami originalnog signala i signala na koji je
 primijenjen \textit{flanger}. U spektrogramu su vidljive nove komponente koje su nastale uslijed modulacije
-zakašnjelog ulaznog signala frekvencijom 1 Hz. 
+zakašnjelog ulaznog signala frekvencijom 1 Hz.
 
-\begin{figure}[h]
-    \includegraphics[width=200]{slike/flanger_spektar.png}
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/flanger_spektar.png}
     \centering
-    \caption{Spektrogram signala s \textit{flanger} efektom}              
+    \caption{Spektrogram signala s \textit{flanger} efektom}
     \label{flang_spektar}
 \end{figure}
 
@@ -162,13 +163,12 @@ Efekt odjeka temelji se na efektu kašnjenja. Efekt kašnjenja može se opisati 
 koji se zatim reproducira nakon određenog vremena. Signal kojemu je dodan efekt kašnjenja, može se
 reproducirati više puta ili se ponovno snimiti što stvara ponavljajući zvuk. Osnovna struktura kašnjenja može
 se ostvariti pomoću FIR ili IIR filtra ili kombinacijom dvaju filtara. Efekt odjeka može se realizirati pomoću
-jednostavnog FIR filtra. Jednadžba FIR filtra kojim se realizira odjek dana je u nastavku.\\
-\[y(n) = x(n) + g*x(n-M), M = \tau/f_{s}\]
-Gdje:
+jednostavnog FIR filtra. Jednadžba FIR filtra kojim se realizira odjek dana je jednažbom (\ref{flanger}).
+Gdje je: \[M = \tau/f_{s}\]
+a $\tau$ i $f_{s}$:
  \begin{itemize}
-   \item{$g$ - predstavlja pojačanje obrađenog signala,}
-   \item{$\tau$ - predstavlja iznos kašnjenja signala,}
-   \item{$f_{s}$ - predstavlja frekvenciju otipkavanja.}
+   \item{$\tau$ - iznos kašnjenja signala,}
+   \item{$f_{s}$ - frekvenciju otipkavanja.}
  \end{itemize}
 Dodavanjem efekta odjeka na osnovni signal zvuk poprima dojam odbijanja zvuka od zida, dok se zapravo čuje
 ponavljanje osnovnog signala.
@@ -178,16 +178,14 @@ signala s dodanom jekom. Na spektru obrađenog
 signala vide se određene frekvencijske komponente koje se ne mogu vidjeti na spektru ulaznog signala.
 Dodatne frekvencijske komponente pojavljuju se upravo zbog ponavljanja signala kroz vrijeme.
 
-\begin{figure}[h]
-  \includegraphics[scale=0.3]{slike/echo_ulaz.jpeg}
-  \centering
+\begin{figure}[H]
+  \centerline{\includegraphics[height=200pt]{slike/echo_ulaz.jpeg}}
   \caption{Spektar ualznog signala}
   \label{echo_ulaz}
 \end{figure}
 
-\begin{figure}[h]
-  \includegraphics[scale=0.3]{slike/echo.png}
-  \centering
+\begin{figure}[H]
+  \centerline{\includegraphics[height=200pt]{slike/echo.png}}
   \caption{Spektar obrađenog signala}
   \label{echo}
 \end{figure}
