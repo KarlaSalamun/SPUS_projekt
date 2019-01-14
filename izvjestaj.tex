@@ -240,7 +240,12 @@ koji se zatim reproducira nakon određenog vremena. Signal kojemu je dodan efekt
 reproducirati više puta ili se ponovno snimiti što stvara ponavljajući zvuk. Osnovna struktura kašnjenja može
 se ostvariti pomoću FIR ili IIR filtra ili kombinacijom dvaju filtara, gdje se efekt odjeka realizira pomoću
 jednostavnog FIR filtra danog jednažbom (\ref{flanger}).
-Gdje je: \[M = \tau/f_{s}\]
+Gdje je:
+\begin{equation}
+  M = \tau/f_{s}
+  \label{M}
+\end{equation}
+
 a $\tau$ i $f_{s}$:
  \begin{itemize}
    \item{$\tau$ - iznos kašnjenja signala,}
@@ -294,6 +299,71 @@ se ne očekuju nove frekvencijske komponente.
   \label{echo}
 \end{figure}
 
+\section{Tremolo}
+Tremolo je efekt koji se dobiva amplitudnom modulacijom tonova niskom frekvencijom (nekoliko Hz). Ta pojava se čuje
+kao drhtanje. Često se ovaj efekt miješa sa vibratom, ali vibrato se dobiva modulacijom visine tona (pitch-modulation).
+
+Općenito, modulacija je postupak u kojemu se u prijenosni signal utiskuje signal informacije. Amplitudna modulacija
+se postiže promjenom amplitude modulacijskog signala. Prijenosni signal služi za prijenos informacije, ali on ne
+sadrži informaciju. Modulacijski signal sadrži informaciju, odnosno on je sam po sebi informacija. Postupak ampliudne
+ modulacije prikazan je slikom \ref{amp_mod}.
+
+ \begin{figure}[H]
+   \centerline{\includegraphics[height=200pt]{slike/amplitudna_modulacija.png}}
+   \caption{Amplitudna modulacija}
+   \label{amp_mod}
+ \end{figure}
+
+ Prijenosni signal je matematički zapisan kao:
+\begin{equation}
+  u_{p} = U_{pm}\*sin(\omega_{p}\*t+\Phi_{0})
+  \label{mat_zapis}
+\end{equation}
+
+Modulacijski:
+\begin{equation}
+  u_{m} = U_{mm}\*sin(\omega_{m}\*t)
+  \label{mod_zapis}
+\end{equation}
+
+Pri čemu je: $\omega_{p}$=2$\omega_{m}$, odnosno $f_{p}$>>$f_{m}$.
+Važan parametar modulacije je dubina ili indeks modulacije. Indeks modulacije je omjer između najveće promjene
+amplitude modulacijskog signala i najveće promjene amplitude prijenosnog signala. Formula za indeks modulacije je:
+\begin{equation}
+  m_{a} = U_{mm}/U_{pm},
+  \label{indeks_mod}
+\end{equation}
+gdje je: $U_{mm}$  amplituda modulacijskog signala, a $U_{pm}$ amplituda prijenosnog signala.
+U ovom projektu, tremolo je izveden u programu MATLAB. Amplitudna modulacije je izračunata na temelju sljedećeg izraza:
+\begin{equation}
+  y(n) = (1+ m_{a}\*m(n))\*x(n),
+  \label{matlab_mod}
+\end{equation}
+gdje su:
+\begin{itemize}
+  \item{$x(n)$ zvučni signal (u ovom slučaju zvuk gitare),}
+  \item{$m(n)$ modulacijski signal niske frekvencije do 20 Hz,}
+  \item{$m_{a}$ je indeks modulacije ( za $m_{a}$=1 je modulacija maksimalna, a za $m_{a}$=0 ne dolazi do modulacije)}
+\end{itemize}
+
+Budući da su i zvučni i modulacijski signal sinusni sa frekvencijama $f_{c}$ i $f_{x}$, nakon primjene ovoga efekta, pojavit
+će se nove komponente oko frekvencije $f_{c}$ i to na frekvencijama $f_{c}$-$f_{x}$ i $f_{c}$+$f_{x}$. Dodatne komponente
+dobro se vide na
+spektrogramu koji je prikazan na slici \ref{tremolo_izlaz} u odnosu na spektrogram ulaznog spektrograma prikazanog
+slikom \ref{tremolo_ulaz}. Komponente su se pojavile na očekivanim frekvencijama oko frekvencije osnovnog
+signala.
+
+\begin{figure}[H]
+   \centerline{\includegraphics[height=200pt]{slike/tremolo_spektar_ulaz.png}}
+   \caption{Spektrogram A tona}
+   \label{tremolo_ulaz}
+ \end{figure}
+
+ \begin{figure}[H]
+   \centerline{\includegraphics[height=200pt]{slike/tremolo_spektar_izlaz.png}}
+   \caption{Spektrogram A tona nakon primjene tremolo efekta}
+   \label{tremolo_izlaz}
+ \end{figure}
 
 \section{Zaključak}
 Digitalna obradba signala sastavni je dio glazbene produkcije. Zvučni efekti, često nastali kao
