@@ -286,7 +286,7 @@ A tona s dodanim odjekom. Kad se uspoređuju spektrogrami ulaznog i obrađenog s
 na spektrogramu vide frekvencijske komponente koje se na spektrogramu originalnog signala ne vide. Novonastale
 frekvencijske komponente su u spektrogramu postavljene kao da se nadovezuju na originalni signal. Takav rezultat je
 očekivan jer odjek na osnovni signal dodaje obrađeni ulazni signal te ga superponira ulaznom signalu nakon određenog
-vremena kašnjenja.
+vremena kašnjenja. Spektrogram opisuje upravo takvo ponašanje.
 
 \begin{figure}[H]
   \centerline{\includegraphics[width=200pt]{slike/A_ton_ulaz.png}}
@@ -304,8 +304,39 @@ Matematički model u MATLABu proveden je sa sljedećim vrijednostima parametara:
 \begin{itemize}
   \item{$g$=1,}
   \item{$M$=$\tau$/$f_{s}$, gdje je $\tau$ zadan kao 1s, a $f_{s}$ zadana frekvencija otipkavanja: 48000Hz i}
-  \item{pojačanje povratne veze (\textit{FeedbackLevel}) 0.5}
+  \item{pojačanje povratne veze $f$=0.5}
 \end{itemize}
+
+Podešavanjem parametra $g$ dobijemo bolje ili lošije vidljive novonastale frekvencijske komponente u
+spektrogramu, gdje je maksimalna vrijednost parametra 1. Kako se vrijednost navedenog parametra povećava, na spektrogramu se bolje uočava ponavljanje
+osnovnog tona. Na grafu obrađenog signala u vremenskoj domeni sa što većom vrijednošću parametra $g$ jasnije
+se vidi na kojoj sekundi je osnovnom signalu nadodan odjek. Drugim riječima, iz grafa obrađenog signala u vremenskoj domeni
+može se lakše odrediti zadano vrijeme kašnjenja. Određivanje vremena kašnjenja ovisi i o parametru $\tau$ koji
+utječe na signal na način da što je $\tau$ manji, graf obrađenog signala je sličniji ulaznom signalu. Takvo ponašanje
+u vremenskoj domeni se preslikava na ponašanje koje čitamo iz spektrograma.
+Pojačanje povratne veze $f$ na vremensku domenu utječe na način da što je parametar veće vrijednosti, u prikazu
+obrađenog signala bolje se raspoznaje koliko puta signal odjekne. Što bi taj parametar bio manji, na prikazu obrađenog
+signala bi se moglo raspoznati manje odjeka. Utjecaj parametra na spektrogram je analogan utjecaju parametra na vremensku
+domenu, odnosno što je parametar veći, na spektrogramu su bolje vidljive novonastale frekvencijske komponente.
+Razlike signala u vremenskoj domeni s različitim vrijednostima parametara vidljive su slikom \ref{A_usporedba}, dok je
+ulazni signal A tona prikazan slikom \ref{A_ton_vrijeme}.
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=200pt]{slike/A_ton_vrijeme.png}}
+  \caption{A ton u vremenskoj domeni}
+  \label{A_ton_vrijeme}
+\end{figure}
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=200pt]{slike/A_ton_usporedba.png}}
+  \caption{Usporedba prikaza obrađenog A tona}
+  \label{A_usporedba}
+\end{figure}
+
+Plavi signal na slici \ref{A_usporedba} odgovara obrađenom signalu
+s već navedenim vrijednostima parametara, a crveni signal odgovara obrađenom signalu s vrijednostima parametara
+$f$=0.1 i $g$=0.5.
+
 
 \section{Tremolo}
 Tremolo je efekt koji se dobiva amplitudnom modulacijom tonova niskom frekvencijom (nekoliko Hz). Ta pojava se čuje
