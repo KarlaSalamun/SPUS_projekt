@@ -56,9 +56,9 @@ karla.salamun@fer.hr}
 
 \renewcommand{\figurename}{Slika}
 
-% \begin{abstract}
-% sažetak??
-% \end{abstract}
+\begin{abstract}
+
+\end{abstract}
 
 \section{Uvod}
 Zvuk je mehanički val koji se prenosi određenim medijem. Ljudsko uho je osjetljivo na
@@ -196,17 +196,17 @@ U spektru je šum vidljiv kao nove spektralne komponente.
 
 \section{DISTORZIJA}
 
-Pojam distorzija odnosi se na izobličenje valnog oblika signala. Do distorzije može doći tijekom snimanja 
-ili reproduciranja zvuka, a u tom smislu radi se o neželjenim izobličenjima signala. Međutim, glazbenici 
-često unose različite vrste izobličenja kako bi dobili zanimljiviji zvuk. Najčešći oblik distorzije je 
+Pojam distorzija odnosi se na izobličenje valnog oblika signala. Do distorzije može doći tijekom snimanja
+ili reproduciranja zvuka, a u tom smislu radi se o neželjenim izobličenjima signala. Međutim, glazbenici
+često unose različite vrste izobličenja kako bi dobili zanimljiviji zvuk. Najčešći oblik distorzije je
 rezanje ulaznog signala nakon što amplituda prijeđe zadanu granicu (ograničavanje signala).
-Rezanje signala (engl. clipping) je nelinearno izobličenje. Postoji mnogo načina rezanja signala a dvije 
-osnovne podjele su: 
+Rezanje signala (engl. clipping) je nelinearno izobličenje. Postoji mnogo načina rezanja signala a dvije
+osnovne podjele su:
 
 \begin{itemize}
-  \item{Simetrična ili asimetrična karakteristika rezanja (izgled signala u vremenu prikazan je na slici 
+  \item{Simetrična ili asimetrična karakteristika rezanja (izgled signala u vremenu prikazan je na slici
     \ref{dist_1})},
-  \item{Oštri (engl. \textit{hard clipping}) ili zaobljeni (engl. \textit{soft clipping}) rubovi karakteristike 
+  \item{Oštri (engl. \textit{hard clipping}) ili zaobljeni (engl. \textit{soft clipping}) rubovi karakteristike
   rezanja (izgled signala u vremenu prikazan prikazan je na slici \ref{dist_2})}.
 \end{itemize}
 
@@ -224,20 +224,20 @@ osnovne podjele su:
     \label{dist_2}
 \end{figure}
 
-Spektar signala na kojeg je dodan efekt distorzije ovisi o funkciji po kojoj se mijenja ulazni signal. Ako je 
-funkcija parna, u spektru će se pojaviti parni harmonici, odnosno neparni harmonici ako je funkcija neparna. 
-U slučaju da funkcija nije niti parna niti neparna, izlazni signal sadržavat će i parne i neparne harmonike. 
-Ovakva vrsta distorzije naziva se harmonička distorzija. Harmonička distorzija vidljiva je u slučajevima kada 
-je na ulazu u sustav za distorziju signal samo sa jednom frekvencijskom komponentom. U stvarnosti je vrlo teško 
-snimiti zvuk samo jedne frekvencije, stoga spektar izlaznog signala ne sadrži samo parne ili neparne harmonijske 
-komponente. Ovakva vrsta distorzije naziva se intermodulacijska distorzija. Spektar izlaznog signala u ovom slučaju 
+Spektar signala na kojeg je dodan efekt distorzije ovisi o funkciji po kojoj se mijenja ulazni signal. Ako je
+funkcija parna, u spektru će se pojaviti parni harmonici, odnosno neparni harmonici ako je funkcija neparna.
+U slučaju da funkcija nije niti parna niti neparna, izlazni signal sadržavat će i parne i neparne harmonike.
+Ovakva vrsta distorzije naziva se harmonička distorzija. Harmonička distorzija vidljiva je u slučajevima kada
+je na ulazu u sustav za distorziju signal samo sa jednom frekvencijskom komponentom. U stvarnosti je vrlo teško
+snimiti zvuk samo jedne frekvencije, stoga spektar izlaznog signala ne sadrži samo parne ili neparne harmonijske
+komponente. Ovakva vrsta distorzije naziva se intermodulacijska distorzija. Spektar izlaznog signala u ovom slučaju
 sadržava frekvencije koje su jednake zbrojevima i razlikama frekvencija ulaznog signala.
-\textit{Hard clipping} unosi neparne harmonike visokih amplituda zbog čega se na izlazu dobiva grubi zvuk. 
-Suprotno hard clippingu, \textit{soft clipping} unosi neparne harmonike manjih amplituda, stoga je zvuk na izlazu 
+\textit{Hard clipping} unosi neparne harmonike visokih amplituda zbog čega se na izlazu dobiva grubi zvuk.
+Suprotno hard clippingu, \textit{soft clipping} unosi neparne harmonike manjih amplituda, stoga je zvuk na izlazu
 manje grub i ugodniji za slušatelje.
 
 U okviru ovog projekta realizirana su dva oblika distorzije: \textit{fuzz} efekt i \textit{overdrive} efekt.
-\textit{Fuzz} je simetrično izobličenje s oštrim rubovima karakteristike rezanja ulaznog signala, a realiziran je 
+\textit{Fuzz} je simetrično izobličenje s oštrim rubovima karakteristike rezanja ulaznog signala, a realiziran je
 jednadžbom \ref{fuzz}.
 
 \begin{equation}
@@ -246,7 +246,7 @@ jednadžbom \ref{fuzz}.
 \end{equation}
 Gdje je $x$ ulazni signal, a $a$ faktor kojim se definira razina distorzije.
 
-Overdrive je simetrično izobličenje sa zaobljenim rubovima karakteristike rezanja ulaznog signala. Odabrana 
+Overdrive je simetrično izobličenje sa zaobljenim rubovima karakteristike rezanja ulaznog signala. Odabrana
 funkcija za postizanje overdrive efekta definirana je jednadžbom \ref{overdrive}.
 
 \begin{equation}
@@ -259,8 +259,8 @@ funkcija za postizanje overdrive efekta definirana je jednadžbom \ref{overdrive
   \label{overdrive}
 \end{equation}
 
-Na slici \ref{A_original_spektar} prikazan je spektrogram originalnog zvuka, dok su na slikama 
-\ref{distorzija_fuzz} i \ref{distorzija_overdrive} prikazani spektrogrami nakon primjene \textit{fuzz} i 
+Na slici \ref{A_original_spektar} prikazan je spektrogram originalnog zvuka, dok su na slikama
+\ref{distorzija_fuzz} i \ref{distorzija_overdrive} prikazani spektrogrami nakon primjene \textit{fuzz} i
 \textit{overdrive} efekta.
 
 \begin{figure}[H]
@@ -358,8 +358,8 @@ $M$ u jednadžbi filtra, a $f$ (\textit{FeedbackLevel}) pojačanje linije s doda
     \label{echo_model}
 \end{figure}
 
-Na slici \ref{A_ton_vrijeme} prikazan je ulazni signal sviranja gitare u vremenu, a na slici \ref{echo_vrijeme} 
-prikazan je taj isti signal u vremenu na koji je dodan efekt odjeka. Ako se uspoređuju ulazni i obrađeni signal može se 
+Na slici \ref{A_ton_vrijeme} prikazan je ulazni signal sviranja gitare u vremenu, a na slici \ref{echo_vrijeme}
+prikazan je taj isti signal u vremenu na koji je dodan efekt odjeka. Ako se uspoređuju ulazni i obrađeni signal može se
 primjetiti kako obrađeni signal izgleda "punije", odnosno vidi se kako je na ulazni signal superponiran dodatni signal.
 Takvo ponašanje kod odjeka je očekivano zato što se obrađeni signal zbraja s ulaznim signalom. Na slici z dodanim
 efektom odjeka može se vidjeti i da se jedno kratko vrijeme u početku ulazni i obrađeni signal podudaraju. Takav rezultat
