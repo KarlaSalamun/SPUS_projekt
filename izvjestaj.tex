@@ -265,7 +265,8 @@ $M$ u jednadžbi filtra, a $f$ (\textit{FeedbackLevel}) pojačanje linije s doda
     \label{echo_model}
 \end{figure}
 
-Na slici \ref{ulaz_vrijeme} prikazan je ulazni signal u vremenu, a na slici \ref{echo_vrijeme} prikazan je signal
+Na slici \ref{ulaz_vrijeme} prikazan je ulazni signal sviranja gitare u vremenu, a na slici \ref{echo_vrijeme} prikazan
+je taj isti signal
 u vremenu na koji je dodan efekt odjeka. Ako se uspoređuju ulazni i obrađeni signal može se primjetiti
 kako obrađeni signal izgleda "punije", odnosno vidi se kako je na ulazni signal superponiran dodatni signal.
 Takvo ponašanje kod odjeka je očekivano zato što se obrađeni signal zbraja s ulaznim signalom. Na slici z dodanim
@@ -280,24 +281,31 @@ vremena kašnjenja.
     \label{echo_vrijeme}
 \end{figure}
 
-Na slici \ref{komp_ulaz_spektar} prikazan je spektrogram ulaznog signala, dok je na slici \ref{echo} prikazan spektrogram
-signala s dodanim odjekom. Kad se uspoređuju spektrogrami ulaznog i obrađenog signala može se zaključiti da nema
-značajnih promjena u spektrogramima, što je očekivano jer dodavanjem odjeka se ne dodaju nove frekvencijske komponente.
-Drugim riječima, ako je ulaznom signalu nadodan signal koji odgovara ulaznom, ali tek nakon određenog vremena u spektru
-se ne očekuju nove frekvencijske komponente.
-
-
-% \begin{figure}[H]
-%   \centerline{\includegraphics[height=200pt]{slike/echo_ulaz.jpeg}}
-%   \caption{Spektar ualznog signala}
-%   \label{echo_ulaz}
-% \end{figure}
+Na slici \ref{A_ulaz_spektar} prikazan je spektrogram A tona, dok je na slici \ref{echo} prikazan spektrogram
+A tona s dodanim odjekom. Kad se uspoređuju spektrogrami ulaznog i obrađenog signala može se zaključiti da se
+na spektrogramu vide frekvencijske komponente koje se na spektrogramu originalnog signala ne vide. Novonastale
+frekvencijske komponente su u spektrogramu postavljene kao da se nadovezuju na originalni signal. Takav rezultat je
+očekivan jer odjek na osnovni signal dodaje obrađeni ulazni signal te ga superponira ulaznom signalu nakon određenog
+vremena kašnjenja.
 
 \begin{figure}[H]
-  \centerline{\includegraphics[height=200pt]{slike/echo.png}}
-  \caption{Spektar obrađenog signala}
+  \centerline{\includegraphics[width=200pt]{slike/A_ton_ulaz.png}}
+  \caption{Spektar A tona}
+  \label{A_ulaz_spektar}
+\end{figure}
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=200pt]{slike/A_ton_echo.png}}
+  \caption{Spektar A tona s odjekom}
   \label{echo}
 \end{figure}
+
+Matematički model u MATLABu proveden je sa sljedećim vrijednostima parametara:
+\begin{itemize}
+  \item{$g$=1,}
+  \item{$M$=$\tau$/$f_{s}$, gdje je $\tau$ zadan kao 1s, a $f_{s}$ zadana frekvencija otipkavanja: 48000Hz i}
+  \item{pojačanje povratne veze (\textit{FeedbackLevel}) 0.5}
+\end{itemize}
 
 \section{Tremolo}
 Tremolo je efekt koji se dobiva amplitudnom modulacijom tonova niskom frekvencijom (nekoliko Hz). Ta pojava se čuje
