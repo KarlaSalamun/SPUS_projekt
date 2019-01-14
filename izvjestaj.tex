@@ -55,9 +55,13 @@ karla.salamun@fer.hr}
 \maketitle
 
 \renewcommand{\figurename}{Slika}
+\renewcommand{\abstractname}{Sažetak}    % clear the title
+\renewcommand{\refname}{Literatura}
 
 \begin{abstract}
-
+Ovom temom pokriveni su neki od efekata koji se koriste u obradi zvuka gitare kao što su distorzija, kompresija,
+\textit{flanger}, odjek i tremolo. Navedeni efekti su opisani i zatim dodani na osnovni zvuk gitare. Nakon dodavanja
+efekta analizirani su spektrogrami originalnih i obrađenih signala.
 \end{abstract}
 
 \section{Uvod}
@@ -100,7 +104,8 @@ Tipični redoslijed efekata za gitaru~\cite{b1} jest kompresija – distorzija �
 
 Filtri po definiciji uklanjaju ili atenuiraju određene frekvencije iz spektra signala iznad
 ili ispod neke granične frekvencije. Izjednačivači, pak, pojačavaju ili smanjuju određene frekvencijske
-pojaseve, dok druge ne mijenjaju.
+pojaseve, dok druge ne mijenjaju. Za analizu signala korišten je spektrogram koji prikazuje snagu pojedinih
+frekvencijskih komponenata u vremenu.
 
 
 
@@ -123,7 +128,7 @@ frekvencijskoj domeni. Blok dijagram kompresora prikazan je slikom \ref{kompresi
     \caption{Blok dijagram kompresora}
     \label{kompresija}
 \end{figure}
-
+\newpage
 Diskretizirani ulazni signal se pretvara u decibele radi intuitivnijih prikaza %(izbaciti ovo i početi od parametara?)
  operacija, a nakon kompresije se vraća u linearnu domenu. Glavni parametri kompresije su ~\cite{b3}:
  \begin{itemize}
@@ -210,20 +215,20 @@ osnovne podjele su:
   rezanja (izgled signala u vremenu prikazan prikazan je na slici \ref{dist_2})}.
 \end{itemize}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \includegraphics[width=200pt]{slike/dist_diode_clip.jpg}
     \centering
     \caption{Simetrično i antisimetrično rezanje signala}
     \label{dist_1}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \includegraphics[width=200pt]{slike/dist_2.jpg}
     \centering
     \caption{\textit{Hard clipping} i \textit{soft clipping}}
     \label{dist_2}
 \end{figure}
-
+\newpage
 Spektar signala na kojeg je dodan efekt distorzije ovisi o funkciji po kojoj se mijenja ulazni signal. Ako je
 funkcija parna, u spektru će se pojaviti parni harmonici, odnosno neparni harmonici ako je funkcija neparna.
 U slučaju da funkcija nije niti parna niti neparna, izlazni signal sadržavat će i parne i neparne harmonike.
@@ -263,14 +268,14 @@ Na slici \ref{A_original_spektar} prikazan je spektrogram originalnog zvuka, dok
 \ref{distorzija_fuzz} i \ref{distorzija_overdrive} prikazani spektrogrami nakon primjene \textit{fuzz} i
 \textit{overdrive} efekta.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \includegraphics[width=200pt]{slike/A_ton.png}
     \centering
     \caption{Spektrogram originalnog signala (A ton)}
     \label{A_original_spektar}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \includegraphics[width=200pt]{slike/distorzija_fuzz.png}
     \centering
     \caption{Spektrogram signala nakon primjene \textit{fuzz} efekta}
@@ -433,7 +438,7 @@ se postiže promjenom amplitude modulacijskog signala. Prijenosni signal služi 
 sadrži informaciju. Modulacijski signal sadrži informaciju, odnosno on je sam po sebi informacija. Postupak ampliudne
  modulacije prikazan je slikom \ref{amp_mod}.
 
- \begin{figure}[H]
+ \begin{figure}[ht]
    \centerline{\includegraphics[height=200pt]{slike/amplitudna_modulacija.png}}
    \caption{Amplitudna modulacija}
    \label{amp_mod}
@@ -477,8 +482,9 @@ dobro se vide na
 spektrogramu koji je prikazan na slici \ref{tremolo_izlaz} u odnosu na spektrogram ulaznog spektrograma prikazanog
 slikom \ref{tremolo_ulaz}. Komponente su se pojavile na očekivanim frekvencijama oko frekvencije osnovnog
 signala.
+\newpage
 
-\begin{figure}[H]
+\begin{figure}[ht]
    \centerline{\includegraphics[height=200pt]{slike/tremolo_ulaz.jpeg}}
    \caption{Spektrogram A tona}
    \label{tremolo_ulaz}
@@ -493,9 +499,17 @@ signala.
 \section{Zaključak}
 Digitalna obradba signala sastavni je dio glazbene produkcije. Zvučni efekti, često nastali kao
 posljedica slučajnih pogrešaka u sviranju i obradbi signala, glavni su faktori u manipulaciji zvukom.
+% Kompresija smanjuje dinamički raspon signala bez distorzije, bez potrebe za rezanjem
+% (\textit{clippingom}).
 
-Kompresija smanjuje dinamički raspon signala bez distorzije, bez potrebe za rezanjem
-(\textit{clippingom}).
+Modulacijski efekti mijenjaju zvuk gitare modulacijom nekih svojstava signala kao što su faza, harmonici,
+frekvencija, amplituda itd. Modulacijom vremena zvuka pomoću kašnjenja sa osnovnim signalom dobije se \textit{flanger}.
+Tremolo efekt se postiže modulacijom amplitude signala. Vremenski efekti se temelje na manipulaciji vremena.
+Odjek je efekt koji se temelji na odjeku zvučnog signala dok je kašnjenje ustvari samo odjek u izraženijem obliku.
+Ovaj efekt se postiže tako da se izvorni signal ponovi nakon određenog vremenskog perioda. Kompresija je dinamički
+efekt koji smanjuje dinamički raspon odnosno smanjuje najglasniji i najtiši dio zvučnog signala. Nakon primjene
+kompresije tiši dijelovi signala su pojačani, a glasniji su prigušeni. Distorzija mijenja izvorni zvuk na način
+da izobliči valni oblik signala.
 
 \begin{thebibliography}{00}
 \bibitem{b1} Cardiff University, ``Digital Audio Effects'',
