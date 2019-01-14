@@ -8,6 +8,7 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{url}
+\usepackage{amsmath}
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -22,33 +23,34 @@
 }
 
 \author{\IEEEauthorblockN{Magdalena Halusek}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}\\
+\IEEEauthorblockA{%\textit{dept. name of organization (of Aff.)} \\
+%\textit{name of organization (of Aff.)}\\
+%City, Country \\
+magdalena.halusek@fer.hr}\\
 \IEEEauthorblockN{Ivana Šarić}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
+\IEEEauthorblockA{%\textit{dept. name of organization (of Aff.)} \\
+%\textit{name of organization (of Aff.)}\\
+%City, Country \\
+ivana.saric@fer.hr}
 \and
 \IEEEauthorblockN{Katarina Prgeša}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}\\
+\IEEEauthorblockA{%\textit{dept. name of organization (of Aff.)} \\
+%\textit{name of organization (of Aff.)}\\
+%City, Country \\
+katarina.prgesa@fer.hr}\\
 \IEEEauthorblockN{Ivana Žeger}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
+\IEEEauthorblockA{%\textit{dept. name of organization (of Aff.)} \\
+%\textit{name of organization (of Aff.)}\\
+%City, Country \\
+ivana.zeger@fer.hr}
 \and
 \IEEEauthorblockN{Karla Salamun}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
+\IEEEauthorblockA{%\textit{dept. name of organization (of Aff.)} \\
+%\textit{name of organization (of Aff.)}\\
+%City, Country \\
+karla.salamun@fer.hr}
 }
+
 
 \maketitle
 
@@ -186,13 +188,103 @@ zvuka kao što je prikazano na slici \ref{komp_sum}. U ovom slučaju problem je 
 \begin{figure}[H]
     \includegraphics[width=200pt]{slike/prenizak_prag.jpg}
     \centering
-    \caption{Spektrogram komprimiranog signala}
+    \caption{Vremenski prikaz komprimiranog signala uz prenizak prag}
     \label{komp_sum}
 \end{figure}
 
 U spektru je šum vidljiv kao nove spektralne komponente.
 
-\section{\textit{Flanger}}
+\section{DISTORZIJA}
+
+Pojam distorzija odnosi se na izobličenje valnog oblika signala. Do distorzije može doći tijekom snimanja 
+ili reproduciranja zvuka, a u tom smislu radi se o neželjenim izobličenjima signala. Međutim, glazbenici 
+često unose različite vrste izobličenja kako bi dobili zanimljiviji zvuk. Najčešći oblik distorzije je 
+rezanje ulaznog signala nakon što amplituda prijeđe zadanu granicu (ograničavanje signala).
+Rezanje signala (engl. clipping) je nelinearno izobličenje. Postoji mnogo načina rezanja signala a dvije 
+osnovne podjele su: 
+
+\begin{itemize}
+  \item{Simetrična ili asimetrična karakteristika rezanja (izgled signala u vremenu prikazan je na slici 
+    \ref{dist_1})},
+  \item{Oštri (engl. \textit{hard clipping}) ili zaobljeni (engl. \textit{soft clipping}) rubovi karakteristike 
+  rezanja (izgled signala u vremenu prikazan prikazan je na slici \ref{dist_2})}.
+\end{itemize}
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/dist_diode_clip.jpg}
+    \centering
+    \caption{Simetrično i antisimetrično rezanje signala}
+    \label{dist_1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/dist_2.jpg}
+    \centering
+    \caption{\textit{Hard clipping} i \textit{soft clipping}}
+    \label{dist_2}
+\end{figure}
+
+Spektar signala na kojeg je dodan efekt distorzije ovisi o funkciji po kojoj se mijenja ulazni signal. Ako je 
+funkcija parna, u spektru će se pojaviti parni harmonici, odnosno neparni harmonici ako je funkcija neparna. 
+U slučaju da funkcija nije niti parna niti neparna, izlazni signal sadržavat će i parne i neparne harmonike. 
+Ovakva vrsta distorzije naziva se harmonička distorzija. Harmonička distorzija vidljiva je u slučajevima kada 
+je na ulazu u sustav za distorziju signal samo sa jednom frekvencijskom komponentom. U stvarnosti je vrlo teško 
+snimiti zvuk samo jedne frekvencije, stoga spektar izlaznog signala ne sadrži samo parne ili neparne harmonijske 
+komponente. Ovakva vrsta distorzije naziva se intermodulacijska distorzija. Spektar izlaznog signala u ovom slučaju 
+sadržava frekvencije koje su jednake zbrojevima i razlikama frekvencija ulaznog signala.
+\textit{Hard clipping} unosi neparne harmonike visokih amplituda zbog čega se na izlazu dobiva grubi zvuk. 
+Suprotno hard clippingu, \textit{soft clipping} unosi neparne harmonike manjih amplituda, stoga je zvuk na izlazu 
+manje grub i ugodniji za slušatelje.
+
+U okviru ovog projekta realizirana su dva oblika distorzije: \textit{fuzz} efekt i \textit{overdrive} efekt.
+\textit{Fuzz} je simetrično izobličenje s oštrim rubovima karakteristike rezanja ulaznog signala, a realiziran je 
+jednadžbom \ref{fuzz}.
+
+\begin{equation}
+  f(x)=\frac{x}{|x|}\*(1-e^{\frac{a\*x^2}{|x|}})
+  \label{fuzz}
+\end{equation}
+Gdje je $x$ ulazni signal, a $a$ faktor kojim se definira razina distorzije.
+
+Overdrive je simetrično izobličenje sa zaobljenim rubovima karakteristike rezanja ulaznog signala. Odabrana 
+funkcija za postizanje overdrive efekta definirana je jednadžbom \ref{overdrive}.
+
+\begin{equation}
+  f(x)=
+    \begin{cases}
+      2\*x, & 0 \leq |x|<\frac{1}{3} \\
+      sgn(x)\cdot\frac{3-(2-3\*|x|)^2}{3}, & \frac{1}{3} \leq |x| < \frac{2}{3} \\
+      sgn(x), & \frac{2}{3} \leq |x| \leq 1 \\
+    \end{cases}
+  \label{overdrive}
+\end{equation}
+
+Na slici \ref{A_original_spektar} prikazan je spektrogram originalnog zvuka, dok su na slikama 
+\ref{distorzija_fuzz} i \ref{distorzija_overdrive} prikazani spektrogrami nakon primjene \textit{fuzz} i 
+\textit{overdrive} efekta.
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/A_ton.png}
+    \centering
+    \caption{Spektrogram originalnog signala (A ton)}
+    \label{A_original_spektar}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/distorzija_fuzz.png}
+    \centering
+    \caption{Spektrogram signala nakon primjene \textit{fuzz} efekta}
+    \label{distorzija_fuzz}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=200pt]{slike/distorzija_overdrive.png}
+    \centering
+    \caption{Spektrogram signala nakon primjene \textit{overdrive} efekta}
+    \label{distorzija_overdrive}
+\end{figure}
+
+\section{\textit{FLANGER}}
 
 \textit{Flanger} je zvučni efekt koji na ulazni signal unosi kašnjenje promijenjivog iznosa (najčešće manje
 od 15 ms), te zakašnjeli signal dodaje na ulazni. Pritom se iznos kašnjenja mijenja kao sinusni signal
@@ -204,7 +296,7 @@ efekt.
 \begin{figure}[H]
     \includegraphics[width=200pt]{slike/flanger_simulink.png}
     \centering
-    \caption{Blok-dijagram filtra za realizaciju \textit{flanger} efekta~\cite{b4}}
+    \caption{MATLAB model filtra za realizaciju \textit{flanger} efekta~\cite{b4}}
     \label{flang_simulink}
 \end{figure}
 
@@ -221,7 +313,7 @@ Zvuk na koji je primijenjen \textit{flanger} prepoznatljiv je po efektu koji se 
 \textit{whooshing}. Taj se efekt javlja zbog konstruktivne i destruktivne interferencije između kombiniranih
 zvučnih valova.
 
-Slika \ref{flang_spektar} prikazuje spektrogram signala na koji je pimijenjen \textit{flanger} uz LFO
+Slika \ref{flang_spektar} prikazuje spektrogram signala na koji je primijenjen \textit{flanger} uz LFO
 frekvenciju 1 Hz, maksimalni iznos kašnjenja 5 ms te faktor pojačanja $g=0.7$. U odnosu na spektrogram originalnog
 signala koji je prikazan slikom \ref{komp_ulaz_spektar}, vidljive su nove komponente koje su nastale uslijed
 modulacije zakašnjelog ulaznog signala.
@@ -251,6 +343,7 @@ a $\tau$ i $f_{s}$:
    \item{$\tau$ - iznos kašnjenja signala,}
    \item{$f_{s}$ - frekvenciju otipkavanja.}
  \end{itemize}
+
 Dodavanjem efekta odjeka na osnovni signal zvuk poprima dojam odbijanja zvuka od zida, dok se zapravo čuje
 ponavljanje osnovnog signala. MATLAB model opisanog efekta dan je slikom \ref{echo_model}. Dodatni efekt povezan
 s odjekom je efekt koji nastaje zbog povratne veze, a čuje se kao zvuk koji postepeno nestaje~\cite{b4}. Drugim riječima
@@ -265,10 +358,9 @@ $M$ u jednadžbi filtra, a $f$ (\textit{FeedbackLevel}) pojačanje linije s doda
     \label{echo_model}
 \end{figure}
 
-Na slici \ref{ulaz_vrijeme} prikazan je ulazni signal sviranja gitare u vremenu, a na slici \ref{echo_vrijeme} prikazan
-je taj isti signal
-u vremenu na koji je dodan efekt odjeka. Ako se uspoređuju ulazni i obrađeni signal može se primjetiti
-kako obrađeni signal izgleda "punije", odnosno vidi se kako je na ulazni signal superponiran dodatni signal.
+Na slici \ref{A_ton_vrijeme} prikazan je ulazni signal sviranja gitare u vremenu, a na slici \ref{echo_vrijeme} 
+prikazan je taj isti signal u vremenu na koji je dodan efekt odjeka. Ako se uspoređuju ulazni i obrađeni signal može se 
+primjetiti kako obrađeni signal izgleda "punije", odnosno vidi se kako je na ulazni signal superponiran dodatni signal.
 Takvo ponašanje kod odjeka je očekivano zato što se obrađeni signal zbraja s ulaznim signalom. Na slici z dodanim
 efektom odjeka može se vidjeti i da se jedno kratko vrijeme u početku ulazni i obrađeni signal podudaraju. Takav rezultat
 je također očekivan jer efekt odjeka djeluje upravo tako da se ulaznom signalu superponira obrađeni signal nakon određenog
@@ -281,7 +373,7 @@ vremena kašnjenja.
     \label{echo_vrijeme}
 \end{figure}
 
-Na slici \ref{A_ulaz_spektar} prikazan je spektrogram A tona, dok je na slici \ref{echo} prikazan spektrogram
+Na slici \ref{A_original_spektar} prikazan je spektrogram A tona, dok je na slici \ref{echo} prikazan spektrogram
 A tona s dodanim odjekom. Kad se uspoređuju spektrogrami ulaznog i obrađenog signala može se zaključiti da se
 na spektrogramu vide frekvencijske komponente koje se na spektrogramu originalnog signala ne vide. Novonastale
 frekvencijske komponente su u spektrogramu postavljene kao da se nadovezuju na originalni signal. Takav rezultat je
@@ -289,14 +381,8 @@ očekivan jer odjek na osnovni signal dodaje obrađeni ulazni signal te ga super
 vremena kašnjenja. Spektrogram opisuje upravo takvo ponašanje.
 
 \begin{figure}[H]
-  \centerline{\includegraphics[width=200pt]{slike/A_ton_ulaz.png}}
-  \caption{Spektar A tona}
-  \label{A_ulaz_spektar}
-\end{figure}
-
-\begin{figure}[H]
   \centerline{\includegraphics[width=200pt]{slike/A_ton_echo.png}}
-  \caption{Spektar A tona s odjekom}
+  \caption{Spektrogram A tona s odjekom}
   \label{echo}
 \end{figure}
 
